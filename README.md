@@ -19,7 +19,7 @@ How to run the script:
  - Run the script with this command: "python mysql-remote-dump.py"
  - Fill up the form
  
- Form documentation:
+Form documentation:
  - Host name: Remote server host name. Ex. example.com
  - Server user name: Remote server ssh username
  - Server password: Remore server ssh password
