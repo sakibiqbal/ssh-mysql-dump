@@ -1,11 +1,11 @@
 # ssh-mysql-dump
 
-Project name: MySQL remote dump
-Author: Sakib Iqbal
-Author email: mail@sakibiqbal.com
-Short description: Script to dump mysql database into local from remote server.
-Script Language: Python 2.7
-Dependancy: paramiko, setuptools
+Project name: MySQL remote dump 
+Author: Sakib Iqbal 
+Author email: mail@sakibiqbal.com 
+Short description: Script to dump mysql database into local from remote server. 
+Script Language: Python 2.7 
+Dependancy: paramiko, setuptools 
 
 Idel scenario and dependency:
  - Server hosted MySQL
