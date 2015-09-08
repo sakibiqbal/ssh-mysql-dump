@@ -1,5 +1,6 @@
 import paramiko
 import time
+from sys import argv
 
 class downloadDB(object):
     """
@@ -20,7 +21,7 @@ class downloadDB(object):
 
         self.ssh = paramiko.SSHClient()
         self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        self.fileName = str(int(time.time())) + '_auto_download.sql.gz'
+        self.fileName = str(int(time.time())) + '_auto_download.sql.zip'
 
     def connectSSH(self):
         try:
@@ -48,7 +49,7 @@ class downloadDB(object):
         transport.connect(username = self.sshUser, password = self.sshPassword)
 
         sftp = paramiko.SFTPClient.from_transport(transport)
-        sftp.get(self.fileName, self.dbName + '.sql.gz')
+        sftp.get(self.fileName, self.dbName + '.sql.zip')
         sftp.close()
         transport.close()
 
@@ -64,12 +65,26 @@ class downloadDB(object):
 
 
 if __name__ == '__main__':
-    server = raw_input('Host name: ')
-    username = raw_input('Server user name: ')
-    password = raw_input('Server password: ')
-    dbName = raw_input('Database Name: ')
-    dbUser = raw_input('Database user name: ')
-    dbPass = raw_input('Database password: ')
-
-    dump = downloadDB(server, username, password, dbName, dbUser, dbPass)
-    dump.run()
+    if len(argv) == 1:
+        server = raw_input('Host name: ')
+        username = raw_input('Server user name: ')
+        password = raw_input('Server password: ')
+        dbName = raw_input('Database Name: ')
+        dbUser = raw_input('Database user name: ')
+        dbPass = raw_input('Database password: ')
+    
+        dump = downloadDB(server, username, password, dbName, dbUser, dbPass)
+        dump.run()
+    elif len(argv) == 7:
+        server = argv[1]
+        username = argv[2]
+        password = argv[3]
+        dbName = argv[4]
+        dbUser = argv[5]
+        dbPass = argv[6]
+        
+        dump = downloadDB(server, username, password, dbName, dbUser, dbPass)
+        dump.run()
+    else:
+        print 'Run command with this format: python mysql-remote-dump.py <host> <host user> <host password> <DB name> <DB user> <DB pass>'
+        
